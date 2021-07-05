@@ -3,11 +3,11 @@ How to use:
 1.	Use readwrite.py to create a ordered book. Input the file name of the raw data. Restart python after each use because I bind some attributions to the class instead of instance. This can be changed easily. However, I did not bother to fix it since the ordered book is created as I wanted. Besides, I think read one line and throw the previous line to the garbage collector may be a good idea. (It is fun to me at least.)
 2.	Use analysis class in anlysis.py to read ordered book.
 analysis class has mothods: 
-vwap for calculating the volume weighted average prices at a given time or within a given time window, where the time window is a pair of integers of the form (start time, end time). If vwap takes a time, then it returns a float. if vwap takes a time windows, then it returns a dict, of which keys are time in the time window, values are the corresponding vwap.
-twap for calculating the time weighted average prices at a given time or within a given time window. If twap takes a time, then it returns a float. if twap takes a time windows, then it returns a dict, of which keys are time in the time window, values are the corresponding vwap.
+  vwap for calculating the volume weighted average prices at a given time or within a given time window, where the time window is a pair of integers of the form (start time, end time). If vwap takes a time, then it returns a float. if vwap takes a time windows, then it returns a dict, of which keys are time in the time window, values are the corresponding vwap.
+  twap for calculating the time weighted average prices at a given time or within a given time window. If twap takes a time, then it returns a float. if twap takes a time windows, then it returns a dict, of which keys are time in the time window, values are the corresponding vwap.
 arbi for calculating the arbitrage index, which is the number of chances of arbitrage divided by the number of orders within a given time window. arbi takes a time window and return a float, and a dict, of which keys are order id, and values are the corresponding list of order ids that form a chance of arbitrage.
 sampling for randomly choose a time window with minimum number of orders. sampling takes an integer for time span of the time window, and an integer for minimum number of orders, returns a time window.
-side for splitting orders within a given time window by the side of orders. side takes a time window and returns two dicts, one for each side.
+  side for splitting orders within a given time window by the side of orders. side takes a time window and returns two dicts, one for each side.
 3.	In result.py, use data class to time wisely random sample to data. 
 4.	In test.py, I random sampled the data with data class and use the sampled data to train a Lasso model by sklearn. The sampled data is saved as json files.
 Other py files: 
@@ -25,6 +25,6 @@ I used following predictive features:
 3.	Lowest/median/highest twap and twap momentum within a 3 seconds time window.
 4.	Lowest/median/highest vwap and vwap momentum within a 3 seconds time window.
 Unfortunately, I do not have time to complete my 3 steps. I will only present my result of the Lasso model. The dependent variable of the Lasso model is the arbitrage index, and the independent variables are the other features I mentioned above.
-The result does not look well.Then I tried to normalized the X and again the model does not look well. The reason of this poor performance of the model is due to:
+The result does not look well. Then I tried to normalized the X and again the model does not look well. The reason of this poor performance of the model is due to:
 1.	the predictive features X are not suitable to predict the arbitrage index. If I had more time, I would find more features.
 2.	the arbitrage index of this sample set is sparse. If I had more time, I would form two groups of the same size, one with samples of high arbitrage indices, the other with samples of low arbitrage indices. Then use principal component analysis or clustering methods to find the useful features.
