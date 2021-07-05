@@ -1,5 +1,5 @@
 # interview_code_test
-How to use:
+<h> How to use<\h>:
 1.	Use readwrite.py to create a ordered book. Input the file name of the raw data. Restart python after each use because I bind some attributions to the class instead of instance. This can be changed easily. However, I did not bother to fix it since the ordered book is created as I wanted. Besides, I think read one line and throw the previous line to the garbage collector may be a good idea. (It is fun to me at least.)
 2.	Use analysis class in anlysis.py to read ordered book.
 analysis class has mothods: 
